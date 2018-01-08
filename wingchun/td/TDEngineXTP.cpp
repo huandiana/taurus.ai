@@ -20,6 +20,7 @@
 #include "TDEngineXTP.h"
 #include "longfist/xtp.h"
 #include "longfist/LFUtils.h"
+#include "PasswordUtil.hpp"
 #include "TypeConvert.hpp"
 
 USING_WC_NAMESPACE
@@ -56,8 +57,7 @@ TradeAccount TDEngineXTP::load_account(int idx, const json& j_config)
 {
     // internal load
     string user_id = j_config[WC_CONFIG_KEY_USER_ID].get<string>();
-    string password = j_config[WC_CONFIG_KEY_PASSWORD].get<string>();
-
+    string password = decodeMsg(j_config[WC_CONFIG_KEY_PASSWORD].get<string>());
     AccountUnitXTP& unit = account_units[idx];
     unit.session_id = -1;
     unit.logged_in = false;

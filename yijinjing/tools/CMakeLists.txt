@@ -21,3 +21,9 @@ file(COPY journal_dumper DESTINATION .)
 
 INSTALL(TARGETS journal_tool DESTINATION "bin")
 INSTALL(FILES journal_dumper DESTINATION "bin")
+
+
+INCLUDE_DIRECTORIES("/usr/local/include/cryptopp")
+LINK_DIRECTORIES("/usr/local/lib64/")
+ADD_EXECUTABLE(code_gen PasswordEncoder.cpp)
+TARGET_LINK_LIBRARIES(code_gen python libcryptopp.a ${Boost_LIBRARIES})

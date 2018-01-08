@@ -15,12 +15,15 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.7)
 PROJECT(wingchunmd)
 
+INCLUDE_DIRECTORIES("/usr/local/include/cryptopp")
+LINK_DIRECTORIES("/usr/local/lib64/")
+
 SET(CTP_SOURCE_FILES MDEngineCTP.cpp MDEngineCTP.h IMDEngine.cpp IMDEngine.h ../base/IEngine.cpp ../base/IEngine.h)
 ADD_LIBRARY(ctpmd SHARED ${CTP_SOURCE_FILES})
-TARGET_LINK_LIBRARIES(ctpmd journal kflog thostmduserapi ${Boost_LIBRARIES})
+TARGET_LINK_LIBRARIES(ctpmd journal kflog thostmduserapi libcryptopp.a ${Boost_LIBRARIES})
 INSTALL(TARGETS ctpmd DESTINATION "lib/wingchun")
 
 SET(XTP_SOURCE_FILES MDEngineXTP.cpp MDEngineXTP.h IMDEngine.cpp IMDEngine.h ../base/IEngine.cpp ../base/IEngine.h)
 ADD_LIBRARY(xtpmd SHARED ${XTP_SOURCE_FILES})
-TARGET_LINK_LIBRARIES(xtpmd journal kflog xtpquoteapi ${Boost_LIBRARIES})
+TARGET_LINK_LIBRARIES(xtpmd journal kflog xtpquoteapi libcryptopp.a ${Boost_LIBRARIES})
 INSTALL(TARGETS xtpmd DESTINATION "lib/wingchun")

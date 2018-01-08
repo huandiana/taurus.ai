@@ -21,6 +21,7 @@
 #include "longfist/ctp.h"
 #include "longfist/LFUtils.h"
 #include "TypeConvert.hpp"
+#include "PasswordUtil.hpp"
 #include <boost/algorithm/string.hpp>
 
 USING_WC_NAMESPACE
@@ -66,7 +67,7 @@ TradeAccount TDEngineCTP::load_account(int idx, const json& j_config)
     string broker_id = j_config[WC_CONFIG_KEY_BROKER_ID].get<string>();
     string user_id = j_config[WC_CONFIG_KEY_USER_ID].get<string>();
     string investor_id = j_config[WC_CONFIG_KEY_INVESTOR_ID].get<string>();
-    string password = j_config[WC_CONFIG_KEY_PASSWORD].get<string>();
+    string password = decodeMsg(j_config[WC_CONFIG_KEY_PASSWORD].get<string>());
 
     AccountUnitCTP& unit = account_units[idx];
     unit.api = nullptr;

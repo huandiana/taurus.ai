@@ -15,14 +15,17 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.7)
 PROJECT(wingchuntd)
 
+INCLUDE_DIRECTORIES("/usr/local/include/cryptopp")
+LINK_DIRECTORIES("/usr/local/lib64/")
+
 SET(TD_SOURCE_FILES  ITDEngine.cpp ITDEngine.h ../base/IEngine.cpp ../base/IEngine.h ../base/TDUserStruct.cpp ../base/TDUserStruct.h)
 
 SET(CTP_SOURCE_FILES ${TD_SOURCE_FILES} TDEngineCTP.cpp TDEngineCTP.h)
 ADD_LIBRARY(ctptd SHARED ${CTP_SOURCE_FILES})
-TARGET_LINK_LIBRARIES(ctptd journal kflog thosttraderapi ${Boost_LIBRARIES})
+TARGET_LINK_LIBRARIES(ctptd journal kflog thosttraderapi libcryptopp.a ${Boost_LIBRARIES})
 INSTALL(TARGETS ctptd DESTINATION "lib/wingchun")
 
 SET(XTP_SOURCE_FILES ${TD_SOURCE_FILES} TDEngineXTP.cpp TDEngineXTP.h)
 ADD_LIBRARY(xtptd SHARED ${XTP_SOURCE_FILES})
-TARGET_LINK_LIBRARIES(xtptd journal kflog xtptraderapi ${Boost_LIBRARIES})
+TARGET_LINK_LIBRARIES(xtptd journal kflog xtptraderapi libcryptopp.a ${Boost_LIBRARIES})
 INSTALL(TARGETS xtptd DESTINATION "lib/wingchun")

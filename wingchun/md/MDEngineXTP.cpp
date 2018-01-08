@@ -22,6 +22,7 @@
 #include "MDEngineXTP.h"
 #include "TypeConvert.hpp"
 #include "Timer.h"
+#include "PasswordUtil.hpp"
 #include "EngineUtil.hpp"
 #include "longfist/xtp.h"
 #include "longfist/LFUtils.h"
@@ -39,7 +40,7 @@ void MDEngineXTP::load(const json& j_config)
 {
     client_id = j_config["ClientId"].get<int>();
     user_id = j_config[WC_CONFIG_KEY_USER_ID].get<string>();
-    password = j_config[WC_CONFIG_KEY_PASSWORD].get<string>();
+    password = decodeMsg(j_config[WC_CONFIG_KEY_PASSWORD].get<string>());
     front_ip = j_config["Ip"].get<string>();
     front_port = j_config["Port"].get<int>();
 }

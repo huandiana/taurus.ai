@@ -22,6 +22,7 @@
 #include "MDEngineCTP.h"
 #include "TypeConvert.hpp"
 #include "Timer.h"
+#include "PasswordUtil.hpp"
 #include "longfist/ctp.h"
 #include "longfist/LFUtils.h"
 
@@ -36,7 +37,7 @@ void MDEngineCTP::load(const json& j_config)
 {
     broker_id = j_config[WC_CONFIG_KEY_BROKER_ID].get<string>();
     user_id = j_config[WC_CONFIG_KEY_USER_ID].get<string>();
-    password = j_config[WC_CONFIG_KEY_PASSWORD].get<string>();
+    password = decodeMsg(j_config[WC_CONFIG_KEY_PASSWORD].get<string>());
     front_uri = j_config[WC_CONFIG_KEY_FRONT_URI].get<string>();
 }
 
